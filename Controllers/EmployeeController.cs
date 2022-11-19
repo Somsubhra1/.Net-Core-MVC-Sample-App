@@ -12,7 +12,6 @@ namespace MVCPractice.Controllers
 {
     public class EmployeeController : Controller
     {
-
         private IEmployeeRepository _employeeRepository;
 
         public EmployeeController(IEmployeeRepository employeeRepository)
@@ -20,10 +19,9 @@ namespace MVCPractice.Controllers
             _employeeRepository = employeeRepository;
         }
 
-        // GET: /<controller>/
-        public IActionResult GetEmployees()
+        public async Task<IActionResult> GetEmployeesAsync()
         {
-            var employees = _employeeRepository.GetEmployees();
+            var employees = await _employeeRepository.GetEmployeesAsync();
             return View("Index", employees);
         }
 

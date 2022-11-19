@@ -1,11 +1,18 @@
-﻿using MVCPractice.IRepositories;
+﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
+using MVCPractice.IRepositories;
+using MVCPractice.Models;
 using MVCPractice.Repositories;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
-builder.Services.AddSingleton<IEmployeeRepository, EmployeeRepository>();
+
+builder.Services.AddDbContext<DbConnectionContext>(options =>
+            options.UseNpgsql(builder.Configuration.GetConnectionString("DbUri")));
+
+builder.Services.AddTransient<IEmployeeRepository, EmployeeRepository>();
 
 var app = builder.Build();
 

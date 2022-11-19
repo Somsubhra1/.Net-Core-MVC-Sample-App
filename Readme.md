@@ -8,6 +8,8 @@
 
 - .Net Core 7.0
 - Razor Templating Engine
+- Entity Framework
+- PostgreSQL
 - Nuget
 
 

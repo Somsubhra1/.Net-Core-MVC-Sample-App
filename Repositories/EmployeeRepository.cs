@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Linq;
+using Microsoft.EntityFrameworkCore;
 using MVCPractice.IRepositories;
 using MVCPractice.Models;
 
@@ -6,47 +8,22 @@ namespace MVCPractice.Repositories
 {
     public class EmployeeRepository : IEmployeeRepository
     {
-        private readonly List<Employee> _employees;
-        public EmployeeRepository()
+        private readonly DbConnectionContext _context;
+        public EmployeeRepository(DbConnectionContext context)
         {
-            _employees = new List<Employee>()
-            {
-                new Employee()
-                {
-                    EmployeeId = 1,
-                    Name = "A",
-                    Department = "HR",
-                    Designation = "IT"
-
-                },
-                new Employee()
-                {
-                    EmployeeId = 2,
-                    Name = "B",
-                    Department = "Admin",
-                    Designation = "IT"
-
-                },
-                new Employee()
-                {
-                    EmployeeId = 3,
-                    Name = "C",
-                    Department = "ITIS",
-                    Designation = "IT"
-
-                },
-            };
+            _context = context;
         }
 
-        public int AddEmployee(Employee employee)
+        public async Task<int> AddEmployee(Employee employee)
         {
-            _employees.Add(employee);
-            return _employees.Count() - 1;
+            _context.Employees.Add(employee);
+            await _context.SaveChangesAsync();
+            return employee.EmployeeId;
         }
 
-        public List<Employee> GetEmployees()
+        public async Task<List<Employee>> GetEmployeesAsync()
         {
-            return _employees;
+            return await _context.Employees.ToListAsync();
         }
     }
 }
