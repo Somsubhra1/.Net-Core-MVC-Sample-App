@@ -4,11 +4,11 @@ using MVCPractice.Models;
 
 namespace MVCPractice.Repositories
 {
-	public class EmployeeRepository: IEmployeeRepository
-	{
+    public class EmployeeRepository : IEmployeeRepository
+    {
         private readonly List<Employee> _employees;
-		public EmployeeRepository()
-		{
+        public EmployeeRepository()
+        {
             _employees = new List<Employee>()
             {
                 new Employee()
@@ -36,7 +36,7 @@ namespace MVCPractice.Repositories
 
                 },
             };
-		}
+        }
 
         public int AddEmployee(Employee employee)
         {
