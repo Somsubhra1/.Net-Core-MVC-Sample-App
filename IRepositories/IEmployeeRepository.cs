@@ -3,13 +3,11 @@ using MVCPractice.Models;
 
 namespace MVCPractice.IRepositories
 {
-	public interface IEmployeeRepository
-	{
-		public List<Employee> GetEmployees();
+    public interface IEmployeeRepository
+    {
+        public Task<List<Employee>> GetEmployeesAsync();
 
-        public int AddEmployee(Employee employee);
-
-
+        public Task<int> AddEmployee(Employee employee);
     }
 }
 
