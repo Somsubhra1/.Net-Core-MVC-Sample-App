@@ -2,21 +2,25 @@
 
 <table>
     <tr>
-        <th>EmployeeId</th>
+        <th>Employee Number</th>
         <th>Employee Name</th>
         <th>Department</th>
         <th>Designation</th>
+        <th>Edit</th>
+        <th>Delete</th>
     </tr>
 
-    @foreach(var emp in Model)
-{
-            <tr>
-                <td>@emp.EmployeeId</td>
-                <td>@emp.Name</td>
-                <td>@emp.Department</td>
-                <td>@emp.Designation</td>
-            </tr>
-}
+    @foreach (var emp in Model)
+    {
+        <tr>
+            <td>@emp.EmployeeNumber</td>
+            <td>@emp.Name</td>
+            <td>@emp.Department</td>
+            <td>@emp.Designation</td>
+            <td><a asp-action="UpdateEmployee" asp-route-employeeId="@emp.EmployeeId">Edit</a> </td>
+            <td><a asp-action="DeleteEmployee" asp-route-employeeId="@emp.EmployeeId">Delete</a></td>
+        </tr>
+    }
 
 
 </table>

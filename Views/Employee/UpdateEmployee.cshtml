@@ -1,0 +1,12 @@
+﻿@model Employee
+
+<form method="post" action="UpdateEmployee">
+
+
+    @Html.Partial("_AddEditEmployeePartial")
+
+    <input type="hidden" asp-for="EmployeeId" />
+
+
+    <input type="submit" value="Save" />
+</form>

@@ -8,9 +8,11 @@ namespace MVCPractice.Models
         [Key]
         public int EmployeeId { get; set; }
 
+        public string EmployeeNumber { get; set; }
+
         public string Name { get; set; }
 
-        public string Department { get; set; }
+        public int Department { get; set; }
 
         public string Designation { get; set; }
     }
