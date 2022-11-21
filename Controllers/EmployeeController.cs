@@ -13,10 +13,12 @@ namespace MVCPractice.Controllers
     public class EmployeeController : Controller
     {
         private IEmployeeRepository _employeeRepository;
+        private IDepartmentRepository _departmentRepository;
 
-        public EmployeeController(IEmployeeRepository employeeRepository)
+        public EmployeeController(IEmployeeRepository employeeRepository, IDepartmentRepository departmentRepository)
         {
             _employeeRepository = employeeRepository;
+            _departmentRepository = departmentRepository;
         }
 
         public async Task<IActionResult> GetEmployeesAsync()
@@ -25,28 +27,36 @@ namespace MVCPractice.Controllers
             return View("Index", employees);
         }
 
-        public IActionResult AddEmployee()
+        public async Task<IActionResult> AddEmployee()
         {
-            return View("AddEmployee");
+            EmployeeViewModel evm = new EmployeeViewModel()
+            {
+                Departments = await _departmentRepository.GetAllDepartmentsAsync()
+            };
+            return View("AddEmployee", evm);
         }
 
         [HttpPost]
-        public IActionResult AddEmployee(Employee employee)
+        public IActionResult AddEmployee(EmployeeViewModel evm)
         {
-            _employeeRepository.AddEmployee(employee);
+            _employeeRepository.AddEmployee(evm.Employee);
             return RedirectToAction("GetEmployees");
         }
 
         public async Task<IActionResult> UpdateEmployee(int employeeId)
         {
-            var employee = await _employeeRepository.GetEmployeeByIdAsync(employeeId);
-            return View("UpdateEmployee", employee);
+            EmployeeViewModel evm = new EmployeeViewModel()
+            {
+                Employee = await _employeeRepository.GetEmployeeByIdAsync(employeeId),
+                Departments = await _departmentRepository.GetAllDepartmentsAsync()
+            };
+            return View("UpdateEmployee", evm);
         }
 
         [HttpPost]
-        public async Task<IActionResult> UpdateEmployee(Employee employee)
+        public async Task<IActionResult> UpdateEmployee(EmployeeViewModel evm)
         {
-            await _employeeRepository.UpdateEmployee(employee);
+            await _employeeRepository.UpdateEmployee(evm.Employee);
 
             return RedirectToAction("GetEmployees");
         }

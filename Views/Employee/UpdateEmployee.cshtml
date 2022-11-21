@@ -1,11 +1,11 @@
-﻿@model Employee
+﻿@model EmployeeViewModel
 
 <form method="post" action="UpdateEmployee">
 
 
     @Html.Partial("_AddEditEmployeePartial")
 
-    <input type="hidden" asp-for="EmployeeId" />
+    <input type="hidden" asp-for="Employee.EmployeeId" />
 
 
     <input type="submit" value="Save" />

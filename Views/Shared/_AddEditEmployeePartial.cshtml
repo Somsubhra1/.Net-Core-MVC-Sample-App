@@ -1,25 +1,33 @@
-﻿@model Employee
+﻿@model EmployeeViewModel
 
 <table>
 
     <tr>
         <td>Employee Number</td>
-        <td><input type="text" asp-for="EmployeeNumber" /></td>
+        <td><input type="text" asp-for="Employee.EmployeeNumber" /></td>
     </tr>
 
     <tr>
         <td>Name</td>
-        <td><input type="text" asp-for="Name" /></td>
+        <td><input type="text" asp-for="Employee.Name" /></td>
     </tr>
 
     <tr>
         <td>Department</td>
-        <td><input type="text" asp-for="Department" /></td>
+        <td>
+            <select asp-for="Employee.Department">
+                @foreach (var dept in Model.Departments)
+                {
+                    <option value="@dept.DepartmentId">@dept.DepartmentName</option>
+                }
+
+            </select>
+        </td>
     </tr>
 
     <tr>
         <td>Designation</td>
-        <td><input type="text" asp-for="Designation" /></td>
+        <td><input type="text" asp-for="Employee.Designation" /></td>
     </tr>
 
 </table> 

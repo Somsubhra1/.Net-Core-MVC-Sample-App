@@ -13,6 +13,7 @@ builder.Services.AddDbContext<DbConnectionContext>(options =>
             options.UseNpgsql(builder.Configuration.GetConnectionString("DbUri")));
 
 builder.Services.AddTransient<IEmployeeRepository, EmployeeRepository>();
+builder.Services.AddTransient<IDepartmentRepository, DepartmentRepository>();
 
 var app = builder.Build();
 
