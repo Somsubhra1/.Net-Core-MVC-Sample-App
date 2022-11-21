@@ -15,7 +15,7 @@
     <tr>
         <td>Department</td>
         <td>
-            <select asp-for="Employee.Department">
+            <select asp-for="Employee.DepartmentId">
                 @foreach (var dept in Model.Departments)
                 {
                     <option value="@dept.DepartmentId">@dept.DepartmentName</option>

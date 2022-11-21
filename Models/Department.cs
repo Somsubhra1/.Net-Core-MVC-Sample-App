@@ -9,6 +9,8 @@ namespace MVCPractice.Models
         public int DepartmentId { get; set; }
 
         public string DepartmentName { get; set; }
+
+        public virtual List<Employee> Employees { get; set; }
     }
 }
 

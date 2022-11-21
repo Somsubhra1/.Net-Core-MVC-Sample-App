@@ -12,6 +12,7 @@ namespace MVCPractice.Models
         public DbConnectionContext(DbContextOptions<DbConnectionContext> options) : base(options)
         {
         }
+
     }
 }
 

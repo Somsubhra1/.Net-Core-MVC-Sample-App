@@ -37,7 +37,7 @@ namespace MVCPractice.Repositories
 
         public async Task<List<Employee>> GetEmployeesAsync()
         {
-            return await _context.Employees.ToListAsync();
+            return await _context.Employees.Include(e => e.Department).ToListAsync();
         }
 
         public async Task<int> UpdateEmployee(Employee employee)
