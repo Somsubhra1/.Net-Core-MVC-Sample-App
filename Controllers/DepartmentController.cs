@@ -32,9 +32,9 @@ namespace MVCPractice.Controllers
         }
 
         [HttpPost]
-        public IActionResult AddDepartment(Department dept)
+        public async Task<IActionResult> AddDepartmentAsync(Department dept)
         {
-            _departmentRepository.AddDepartment(dept);
+            await _departmentRepository.AddDepartment(dept);
             return RedirectToAction("GetDepartments");
         }
 

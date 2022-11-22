@@ -13,8 +13,6 @@ namespace MVCPractice.IRepositories
 
         public Task<Department> GetDepartmentByIdAsync(int departmentId);
 
-        public Task<List<Department>> GetDepartmentsAsync();
-
         public Task<int> UpdateDepartment(Department department);
     }
 }

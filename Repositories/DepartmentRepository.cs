@@ -44,11 +44,6 @@ namespace MVCPractice.Repositories
             return department;
         }
 
-        public async Task<List<Department>> GetDepartmentsAsync()
-        {
-            return await _context.Departments.Where(dept => dept.IsActive == true).ToListAsync();
-        }
-
         public async Task<int> UpdateDepartment(Department department)
         {
             department.ModifiedDate = DateTime.Now;

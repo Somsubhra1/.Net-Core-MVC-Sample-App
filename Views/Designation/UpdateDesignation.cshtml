@@ -1,0 +1,12 @@
+﻿@model Designation
+
+<form method="post" action="UpdateDesignation">
+
+
+    @Html.Partial("_AddEditDesignationPartial")
+
+    <input type="hidden" asp-for="DesignationId" />
+
+
+    <input type="submit" value="Save" />
+</form>
