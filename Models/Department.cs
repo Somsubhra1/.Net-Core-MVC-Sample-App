@@ -11,6 +11,10 @@ namespace MVCPractice.Models
         public string DepartmentName { get; set; }
 
         public virtual List<Employee> Employees { get; set; }
+
+        public bool? IsActive { get; set; }
+
+        public DateTime? ModifiedDate { get; set; }
     }
 }
 

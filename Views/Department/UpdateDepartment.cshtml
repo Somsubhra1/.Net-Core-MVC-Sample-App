@@ -1,0 +1,12 @@
+﻿@model Department
+
+<form method="post" action="UpdateDepartment">
+
+
+    @Html.Partial("_AddEditDepartmentPartial")
+
+    <input type="hidden" asp-for="DepartmentId" />
+
+
+    <input type="submit" value="Save" />
+</form>

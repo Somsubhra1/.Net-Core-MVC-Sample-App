@@ -16,12 +16,14 @@
     <None Remove="Microsoft.EntityFrameworkCore.Tools" />
     <None Remove="Npgsql.EntityFrameworkCore.PostgreSQL" />
     <None Remove="Migrations\" />
+    <None Remove="Views\Department\" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Repositories\" />
     <Folder Include="IRepositories\" />
     <Folder Include="Views\Employee\" />
     <Folder Include="Migrations\" />
+    <Folder Include="Views\Department\" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="7.0.0">
