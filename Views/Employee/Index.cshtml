@@ -16,7 +16,7 @@
             <td>@emp.EmployeeNumber</td>
             <td>@emp.Name</td>
             <td>@emp.Department.DepartmentName</td>
-            <td>@emp.Designation</td>
+            <td>@emp.Designation.DesignationName</td>
             <td><a asp-action="UpdateEmployee" asp-route-employeeId="@emp.EmployeeId">Edit</a> </td>
             <td><a asp-action="DeleteEmployee" asp-route-employeeId="@emp.EmployeeId">Delete</a></td>
         </tr>

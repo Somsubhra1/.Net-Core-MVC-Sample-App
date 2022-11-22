@@ -14,6 +14,7 @@ builder.Services.AddDbContext<DbConnectionContext>(options =>
 
 builder.Services.AddTransient<IEmployeeRepository, EmployeeRepository>();
 builder.Services.AddTransient<IDepartmentRepository, DepartmentRepository>();
+builder.Services.AddTransient<IDesignationRepository, DesignationRepository>();
 
 AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
 

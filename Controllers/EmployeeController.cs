@@ -14,11 +14,13 @@ namespace MVCPractice.Controllers
     {
         private IEmployeeRepository _employeeRepository;
         private IDepartmentRepository _departmentRepository;
+        private IDesignationRepository _designationRepository;
 
-        public EmployeeController(IEmployeeRepository employeeRepository, IDepartmentRepository departmentRepository)
+        public EmployeeController(IEmployeeRepository employeeRepository, IDepartmentRepository departmentRepository, IDesignationRepository designationRepository)
         {
             _employeeRepository = employeeRepository;
             _departmentRepository = departmentRepository;
+            _designationRepository = designationRepository;
         }
 
         public async Task<IActionResult> GetEmployeesAsync()
@@ -31,7 +33,8 @@ namespace MVCPractice.Controllers
         {
             EmployeeViewModel evm = new EmployeeViewModel()
             {
-                Departments = await _departmentRepository.GetAllDepartmentsAsync()
+                Departments = await _departmentRepository.GetAllDepartmentsAsync(),
+                Designations = await _designationRepository.GetAllDesignationsAsync()
             };
             return View("AddEmployee", evm);
         }
@@ -48,7 +51,8 @@ namespace MVCPractice.Controllers
             EmployeeViewModel evm = new EmployeeViewModel()
             {
                 Employee = await _employeeRepository.GetEmployeeByIdAsync(employeeId),
-                Departments = await _departmentRepository.GetAllDepartmentsAsync()
+                Departments = await _departmentRepository.GetAllDepartmentsAsync(),
+                Designations = await _designationRepository.GetAllDesignationsAsync()
             };
             return View("UpdateEmployee", evm);
         }

@@ -27,7 +27,15 @@
 
     <tr>
         <td>Designation</td>
-        <td><input type="text" asp-for="Employee.Designation" /></td>
+        <td>
+            <select asp-for="Employee.DesignationId">
+                @foreach (var desi in Model.Designations)
+                {
+                    <option value="@desi.DesignationId">@desi.DesignationName</option>
+                }
+
+            </select>
+        </td>
     </tr>
 
 </table> 

@@ -45,6 +45,29 @@ namespace MVCPractice.Migrations
                     b.ToTable("Departments");
                 });
 
+            modelBuilder.Entity("MVCPractice.Models.Designation", b =>
+                {
+                    b.Property<int>("DesignationId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("DesignationId"));
+
+                    b.Property<string>("DesignationName")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<bool?>("IsActive")
+                        .HasColumnType("boolean");
+
+                    b.Property<DateTime?>("ModifiedDate")
+                        .HasColumnType("timestamp without time zone");
+
+                    b.HasKey("DesignationId");
+
+                    b.ToTable("Designations");
+                });
+
             modelBuilder.Entity("MVCPractice.Models.Employee", b =>
                 {
                     b.Property<int>("EmployeeId")
@@ -56,9 +79,8 @@ namespace MVCPractice.Migrations
                     b.Property<int>("DepartmentId")
                         .HasColumnType("integer");
 
-                    b.Property<string>("Designation")
-                        .IsRequired()
-                        .HasColumnType("text");
+                    b.Property<int>("DesignationId")
+                        .HasColumnType("integer");
 
                     b.Property<string>("EmployeeNumber")
                         .IsRequired()
@@ -78,6 +100,8 @@ namespace MVCPractice.Migrations
 
                     b.HasIndex("DepartmentId");
 
+                    b.HasIndex("DesignationId");
+
                     b.ToTable("Employees");
                 });
 
@@ -89,10 +113,23 @@ namespace MVCPractice.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.HasOne("MVCPractice.Models.Designation", "Designation")
+                        .WithMany("Employees")
+                        .HasForeignKey("DesignationId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.Navigation("Department");
+
+                    b.Navigation("Designation");
                 });
 
             modelBuilder.Entity("MVCPractice.Models.Department", b =>
+                {
+                    b.Navigation("Employees");
+                });
+
+            modelBuilder.Entity("MVCPractice.Models.Designation", b =>
                 {
                     b.Navigation("Employees");
                 });

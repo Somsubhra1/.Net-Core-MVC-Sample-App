@@ -18,7 +18,10 @@ namespace MVCPractice.Models
 
         public virtual Department Department { get; set; }
 
-        public string Designation { get; set; }
+        [ForeignKey("Designation")]
+        public int DesignationId { get; set; }
+
+        public virtual Designation Designation { get; set; }
 
         public bool? IsActive { get; set; }
 

@@ -12,8 +12,8 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace MVCPractice.Migrations
 {
     [DbContext(typeof(DbConnectionContext))]
-    [Migration("20221122121746_init3")]
-    partial class init3
+    [Migration("20221122135056_init")]
+    partial class init
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -37,9 +37,38 @@ namespace MVCPractice.Migrations
                         .IsRequired()
                         .HasColumnType("text");
 
+                    b.Property<bool?>("IsActive")
+                        .HasColumnType("boolean");
+
+                    b.Property<DateTime?>("ModifiedDate")
+                        .HasColumnType("timestamp without time zone");
+
                     b.HasKey("DepartmentId");
 
                     b.ToTable("Departments");
+                });
+
+            modelBuilder.Entity("MVCPractice.Models.Designation", b =>
+                {
+                    b.Property<int>("DesignationId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("DesignationId"));
+
+                    b.Property<string>("DesignationName")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<bool?>("IsActive")
+                        .HasColumnType("boolean");
+
+                    b.Property<DateTime?>("ModifiedDate")
+                        .HasColumnType("timestamp without time zone");
+
+                    b.HasKey("DesignationId");
+
+                    b.ToTable("Designations");
                 });
 
             modelBuilder.Entity("MVCPractice.Models.Employee", b =>
@@ -53,9 +82,8 @@ namespace MVCPractice.Migrations
                     b.Property<int>("DepartmentId")
                         .HasColumnType("integer");
 
-                    b.Property<string>("Designation")
-                        .IsRequired()
-                        .HasColumnType("text");
+                    b.Property<int>("DesignationId")
+                        .HasColumnType("integer");
 
                     b.Property<string>("EmployeeNumber")
                         .IsRequired()
@@ -65,7 +93,7 @@ namespace MVCPractice.Migrations
                         .HasColumnType("boolean");
 
                     b.Property<DateTime?>("ModifiedDate")
-                        .HasColumnType("timestamp with time zone");
+                        .HasColumnType("timestamp without time zone");
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -74,6 +102,8 @@ namespace MVCPractice.Migrations
                     b.HasKey("EmployeeId");
 
                     b.HasIndex("DepartmentId");
+
+                    b.HasIndex("DesignationId");
 
                     b.ToTable("Employees");
                 });
@@ -86,10 +116,23 @@ namespace MVCPractice.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.HasOne("MVCPractice.Models.Designation", "Designation")
+                        .WithMany("Employees")
+                        .HasForeignKey("DesignationId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.Navigation("Department");
+
+                    b.Navigation("Designation");
                 });
 
             modelBuilder.Entity("MVCPractice.Models.Department", b =>
+                {
+                    b.Navigation("Employees");
+                });
+
+            modelBuilder.Entity("MVCPractice.Models.Designation", b =>
                 {
                     b.Navigation("Employees");
                 });

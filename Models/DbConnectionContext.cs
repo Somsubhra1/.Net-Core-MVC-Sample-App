@@ -9,6 +9,8 @@ namespace MVCPractice.Models
 
         public DbSet<Department> Departments { get; set; }
 
+        public DbSet<Designation> Designations { get; set; }
+
         public DbConnectionContext(DbContextOptions<DbConnectionContext> options) : base(options)
         {
         }
