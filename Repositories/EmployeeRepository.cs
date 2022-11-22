@@ -16,6 +16,8 @@ namespace MVCPractice.Repositories
 
         public async Task<int> AddEmployee(Employee employee)
         {
+            employee.ModifiedDate = DateTime.Now;
+            employee.IsActive = true;
             _context.Employees.Add(employee);
             await _context.SaveChangesAsync();
             return employee.EmployeeId;
@@ -23,8 +25,10 @@ namespace MVCPractice.Repositories
 
         public async Task DeleteEmployee(int employeeId)
         {
-            var emp = await GetEmployeeByIdAsync(employeeId);
-            _context.Employees.Remove(emp);
+            var employee = await _context.Employees.Where(emp => emp.EmployeeId == employeeId).FirstAsync();
+            employee.IsActive = false;
+            employee.ModifiedDate = DateTime.Now;
+            _context.Employees.Update(employee);
             await _context.SaveChangesAsync();
         }
 
@@ -37,11 +41,13 @@ namespace MVCPractice.Repositories
 
         public async Task<List<Employee>> GetEmployeesAsync()
         {
-            return await _context.Employees.Include(e => e.Department).ToListAsync();
+            return await _context.Employees.Where(emp => emp.IsActive == true).Include(e => e.Department).ToListAsync();
         }
 
         public async Task<int> UpdateEmployee(Employee employee)
         {
+            employee.ModifiedDate = DateTime.Now;
+            employee.IsActive = true;
             _context.Employees.Update(employee);
             await _context.SaveChangesAsync();
 

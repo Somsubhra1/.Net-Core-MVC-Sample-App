@@ -19,6 +19,10 @@ namespace MVCPractice.Models
         public virtual Department Department { get; set; }
 
         public string Designation { get; set; }
+
+        public bool? IsActive { get; set; }
+
+        public DateTime? ModifiedDate { get; set; }
     }
 }
 
