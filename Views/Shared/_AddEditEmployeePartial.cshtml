@@ -1,41 +1,33 @@
 ﻿@model EmployeeViewModel
 
-<table>
+<div class="mb-3">
+    <label for="" class="form-label">Employee Number:</label>
+    <input type="text" class="form-control" asp-for="Employee.EmployeeNumber">
+</div>
 
-    <tr>
-        <td>Employee Number</td>
-        <td><input type="text" asp-for="Employee.EmployeeNumber" /></td>
-    </tr>
+<div class="mb-3">
+    <label for="" class="form-label">Employee Name:</label>
+    <input type="text" class="form-control" asp-for="Employee.Name">
+</div>
 
-    <tr>
-        <td>Name</td>
-        <td><input type="text" asp-for="Employee.Name" /></td>
-    </tr>
+<div class="mb-3">
+    <label for="" class="form-label">Department:</label>
+    <select class="form-select" asp-for="Employee.DepartmentId">
+        @foreach (var dept in Model.Departments)
+        {
+            <option value="@dept.DepartmentId">@dept.DepartmentName</option>
+        }
 
-    <tr>
-        <td>Department</td>
-        <td>
-            <select asp-for="Employee.DepartmentId">
-                @foreach (var dept in Model.Departments)
-                {
-                    <option value="@dept.DepartmentId">@dept.DepartmentName</option>
-                }
+    </select>
+</div>
 
-            </select>
-        </td>
-    </tr>
+<div class="mb-3">
+    <label for="" class="form-label">Designation:</label>
+    <select class="form-select" asp-for="Employee.DesignationId">
+        @foreach (var desi in Model.Designations)
+        {
+            <option value="@desi.DesignationId">@desi.DesignationName</option>
+        }
 
-    <tr>
-        <td>Designation</td>
-        <td>
-            <select asp-for="Employee.DesignationId">
-                @foreach (var desi in Model.Designations)
-                {
-                    <option value="@desi.DesignationId">@desi.DesignationName</option>
-                }
-
-            </select>
-        </td>
-    </tr>
-
-</table> 
+    </select>
+</div>

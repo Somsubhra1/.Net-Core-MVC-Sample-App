@@ -1,22 +1,27 @@
 ﻿@model List<Designation>
 
-<table>
-    <tr>
-        <th>Designation Id</th>
-        <th>Designation Name</th>
-        <th>Edit</th>
-        <th>Delete</th>
-    </tr>
-
-    @foreach (var desi in Model)
-    {
-        <tr>
-            <td>@desi.DesignationId</td>
-            <td>@desi.DesignationName</td>
-            <td><a asp-action="UpdateDesignation" asp-route-designationId="@desi.DesignationId">Edit</a> </td>
-            <td><a asp-action="DeleteDesignation" asp-route-designationId="@desi.DesignationId">Delete</a></td>
-        </tr>
-    }
+    <a asp-action="AddDesignation" class="btn btn-lg btn-primary float-end">Add</a>
 
 
-</table>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th scope="col">Designation Id</th>
+                <th scope="col">Designation Name</th>
+                <th scope="col">Edit</th>
+                <th scope="col">Delete</th>
+            </tr>
+        </thead>
+
+        @foreach (var desi in Model)
+        {
+            <tr>
+                <td>@desi.DesignationId</td>
+                <td>@desi.DesignationName</td>
+                <td><a class="btn btn-sm btn-warning" asp-action="UpdateDesignation" asp-route-designationId="@desi.DesignationId">Edit</a> </td>
+                <td><a class="btn btn-sm btn-danger" asp-action="DeleteDesignation" asp-route-designationId="@desi.DesignationId">Delete</a></td>
+            </tr>
+        }
+
+
+    </table>

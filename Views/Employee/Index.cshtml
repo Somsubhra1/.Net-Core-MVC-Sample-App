@@ -1,26 +1,30 @@
 ﻿@model List<Employee>
 
-<table>
-    <tr>
-        <th>Employee Number</th>
-        <th>Employee Name</th>
-        <th>Department</th>
-        <th>Designation</th>
-        <th>Edit</th>
-        <th>Delete</th>
-    </tr>
+    <a asp-action="AddEmployee" class="btn btn-lg btn-primary float-end">Add</a>
 
-    @foreach (var emp in Model)
-    {
-        <tr>
-            <td>@emp.EmployeeNumber</td>
-            <td>@emp.Name</td>
-            <td>@emp.Department.DepartmentName</td>
-            <td>@emp.Designation.DesignationName</td>
-            <td><a asp-action="UpdateEmployee" asp-route-employeeId="@emp.EmployeeId">Edit</a> </td>
-            <td><a asp-action="DeleteEmployee" asp-route-employeeId="@emp.EmployeeId">Delete</a></td>
-        </tr>
-    }
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th scope="col">Employee Number</th>
+                <th scope="col">Employee Name</th>
+                <th scope="col">Department</th>
+                <th scope="col">Designation</th>
+                <th scope="col">Edit</th>
+                <th scope="col">Delete</th>
+            </tr>
+        </thead>
+
+        @foreach (var emp in Model)
+        {
+            <tr>
+                <td>@emp.EmployeeNumber</td>
+                <td>@emp.Name</td>
+                <td>@emp.Department.DepartmentName</td>
+                <td>@emp.Designation.DesignationName</td>
+                <td><a class="btn btn-sm btn-warning" asp-action="UpdateEmployee" asp-route-employeeId="@emp.EmployeeId">Edit</a> </td>
+                <td><a class="btn btn-sm btn-danger" asp-action="DeleteEmployee" asp-route-employeeId="@emp.EmployeeId">Delete</a></td>
+            </tr>
+        }
 
 
-</table>
+    </table>
